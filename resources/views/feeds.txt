@@ -1,0 +1,33 @@
+<!--
+            <div class="col-md-8">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Histórico</h5>
+
+                    </div>
+                    <div class="ibox-content">
+
+
+                 <div>
+                        @foreach ($feeds as $feed)
+                            <div class="feed-activity-list">
+                               
+                                <div class="feed-element">
+                                    <a href="#" class="pull-left">
+                                        <img alt="image" class="img-circle" src="{{url('/img')}}/membros/{{$value->t03_idMembro}}.jpg">
+                                    </a>
+                                    <div class="media-body ">
+                                        <strong>{{$feed->t05_nome}}</strong>
+                                        <small class="text-muted">{{ date( 'd/m/Y' , strtotime($feed->created_at))}}</small>
+                                        <p>
+                                            {{$feed->t05_descricao}}
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
+                    </div>
+                </div>
+
+            </div>
+        -->
