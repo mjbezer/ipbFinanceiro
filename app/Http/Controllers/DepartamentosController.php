@@ -3,19 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Membros;
+use App\Http\Models\Departamento;
+use Illuminate\Database\QueryException;
 
-class BancoController extends Controller
+
+class DepartamentosController extends Controller
 {
-    
-    public function __construct(){
+    public function __contruct(){
+        
         $this->middleware('auth');
-
     }
-
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        //
+        $this->middleware('auth');
+
     }
 
     /**
@@ -25,7 +32,11 @@ class BancoController extends Controller
      */
     public function create()
     {
-        //
+        $membros = Membros::all();
+
+        $departamentos = Departamento::all();
+
+        return view('formDepartamentos')->with('membros', $membros)->with('departamentos',$departamentos);
     }
 
     /**
@@ -36,7 +47,20 @@ class BancoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+        $dataForm = $request->all();
+
+        Departamento::create($dataForm);
+
+      
+        return redirect()->back();
+        }catch(\Exeption $e){
+
+            $mensagem = $e->getmessage();
+
+            return redirect()->back()->with('mensagem',$mensagem);
+        }
+       
     }
 
     /**
@@ -79,8 +103,20 @@ class BancoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($t10_idDepartamento)
     {
-        //
+        try{
+        $departamento = Departamento::find($t10_idDepartamento);
+
+        $departamento->delete();
+
+        return redirect()->back();
+        }catch(\Exeption $e){
+
+            $mensagem = $e->getmessage();
+
+            return redirect()->back()->with('mensagem',$mensagem);
+        }
+
     }
 }

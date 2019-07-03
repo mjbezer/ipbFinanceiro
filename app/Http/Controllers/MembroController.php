@@ -105,9 +105,11 @@ class MembroController extends Controller
     }
 
 
-    public function teste(){
+    public function api(){
 
-        echo "teste";
+       $membros = Membros::all();
+
+       return json($membros);
     }
 
   

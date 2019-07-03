@@ -145,7 +145,7 @@
                                  <div class="modal-footer">
                                      <button type="button" class="btn btn-white"
                                          data-dismiss="modal">Cancelar</button>
-                                     <a href="{{route('membro.destroy',['t03_idMembro'=>$membro->t03_idMembro,'t03_sitiuacaoã'=>'Rol Separado'])}}"
+                                     <a href="{{route('membro.destroy',['t03_idMembro'=>$membro->t03_idMembro,'t03_situacao'=>'Rol Separado'])}}"
                                          type="button"
                                          class="btn btn-danger">Inativar</a>
                                  </div>

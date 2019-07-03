@@ -66,9 +66,9 @@
                 <div class="ibox-content">
                 
                 @if(isset($fornecedor))
-                <form method="post" action="/fornecedores/update/{{$forncedor->t08_IDFornecedor}}" class="form-horizontal">
+                <form method="post" action="/fornecedores/update/{{$fornecedor->t08_idFornecedor}}" class="form-horizontal">
                     {!! method_field('PUT')!!}
-               
+                    
                 @else
                 <form method="post" action="/fornecedores/store" class="form-horizontal">
                 @endif
@@ -77,7 +77,7 @@
                         <span class="text-navy">
                         </span>
                         <div class="hr-line-dashed"></div>
-
+                        
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="t08_nome">Razao Social</label>
                             <div class="col-sm-6">
@@ -114,7 +114,7 @@
                             <div class="col-sm-3">
                                 <select name="t08_UF" id="t08_UF" class="form-control">
                                         <option value="">Selecione</option>
-                                        @if(isset($membro))
+                                        @if(isset($fornecedor))
                                         <option selected value="{{$fornecedor->t08_UF}}" >{{$fornecedor->t08_UF}}</option>
                                         @endif
                                         <option value="AC">Acre</option>
@@ -182,9 +182,25 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="t08_cpfCnpj">CPF/CNPJ</label>
                             <div class="col-sm-3">
-                                <input type="text" name="t08_cpfCnpj" id="t08_cpfCnpj" class="form-control "  value="{{$fornecedor->t08_cpf or old('t08_cpfCnpj')}}">
+                                <input type="text" name="t08_cpfCnpj" id="t08_cpfCnpj" class="form-control "  value="{{$fornecedor->t08_cpfCnpj or old('t08_cpfCnpj')}}">
                             </div>
                           
+                        </div>
+                        <div class="form-group">
+
+                            <label class="col-sm-2 control-label" for="t09_idCategoriaFornecedores">Categoria</label>
+                            <div class="col-sm-3">
+                                <select name="t09_idCategoriaFornecedores" id="t09_idCategoriaFornecedores" class="form-control">
+                                    <option value="">Selecione</option>
+                                  @if(isset($fornecedor))
+                                        <option selected value="{{$fornecedor->t09_idCategoriaFornecedores}}" >{{$fornecedor->categoria->t09_nome}}</option>
+                                        @endif
+                                  @foreach ($categoriaFornecedores as $categoriaFornecedor)
+                                    <option value="{{$categoriaFornecedor->t09_idCategoriaFornecedores}}">{{$categoriaFornecedor->t09_nome}}</option>
+                                  @endforeach
+
+                                </select>
+                            </div>
                         </div>
                        
 

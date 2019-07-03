@@ -21,6 +21,8 @@
                  </div>
                  <div class="modal-body">
                        <div class="text-center">
+                            <p><span class="text-danger">Erro na exclusão do registro, favor consultar administrador do Sistema</p>
+
                                         {{session('mensagem')}}
                          </div>
                  </div> 

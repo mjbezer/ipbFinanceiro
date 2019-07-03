@@ -96,7 +96,7 @@
                                             class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
                                     
-                                        <li ><a href="#">Previsão de Orçamentaria</a></li>
+                                        <li ><a href="/orcamento/create">Previsão de Orçamentaria</a></li>
                                         <li><a href="#">Adição de Verba</a></li>
                                         <li><a href="#">Relatorios</a></li>
                                             
@@ -112,9 +112,8 @@
                             <li>
                                 <a href="#" id="damian">Administrativo <span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level collapse">
-                                                 <li><a href="#">Departamentos</a></li>
-                                                <li><a href="#">Conta Contábil Receitas</a></li>
-                                                <li><a href="#">Conta Contábil Despesas</a></li>
+                                                 <li><a href="/departamentos/create">Departamentos</a></li>
+                                                <li><a href="/contaContabil/create">Conta Contábil</a></li>
                                                 <li><a href="#">Forma de Recebimento</a></li>
                                                 <li><a href="#">Forma de Pagamento</a></li>
                                 </ul>

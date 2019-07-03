@@ -56,9 +56,8 @@
                                         <div class="ibox">
                                             <div class="ibox-content">
                                                 <h2>Lista Geral de Fornecedores </h2>
-                                               
-    
-                                                <div class="clients-list">
+                                            
+                                                    <div class="clients-list">
                                                 
                                                 <div class="tab-content">
                                                     <div id="tab-1" class="tab-pane active">
@@ -67,7 +66,7 @@
                                                                 <table class="table table-striped table-hover">
                                                                     <thead>
                                                                         <th>Nome</th>
-                                                                        <th>Telefone</th>
+                                                                        <th>Categoria</th>
                                                                         <th>Celular</th>
                                                                         <th>E-mail</th>
                                                                         <th>Site</th>
@@ -79,51 +78,50 @@
                                                                     
                                                                     <tbody>
                                                                     @foreach ($fornecedores as $fornecedor)
-                                                                        
+                                                                        @if($fornecedor->t08_situacao != "Inativo")
                                                                     <tr>
-                                                                       
-                                                                        
-                                                                        <td> </i> {{$fornecedor->t08_nome}}</td>
-
-                                                                        <td> {{$fornecedor->t08_tipofornecedor}}</td>
-                                                                        <td>{{$fornecedor->t07_agencia}} </td>
-                                                                        <td>{{$fornecedor->t07_fornecedor}} </td>
-                                                                        <td> R$ {{number_format($fornecedor->t07_saldoInicial,2,',','.')}} </td>
+                                                                                                                                             
+                                                                        <td> {{$fornecedor->t08_nome}}</td>
+                                                                        <td> {{$fornecedor->categoria->t09_nome}}</td>
+                                                                        <td>{{$fornecedor->t08_foneCelular}} </td>
+                                                                        <td>{{$fornecedor->t08_email}} </td>
+                                                                        <td> {{$fornecedor->t08_site}} </td>
 
 
 
                                                                         <td class="project-actions">
                                                                               
-                                                                                <a href="/fornecedores/edit/{{$fornecedor->t07_idfornecedorBancaria}}" class="btn btn-outline btn-info btn-sm">
+                                                                                <a href="/fornecedores/edit/{{$fornecedor->t08_idFornecedor}}" class="btn btn-outline btn-info btn-sm">
                                                                                     <i class="fa fa-pencil"></i> Editar </a>
-                                                                                  <button class="btn btn-outline btn-danger btn-sm" data-toggle="modal" data-target="#modalExclusao{{$fornecedor->t07_idfornecedorBancaria}}"><i class="fa fa-times"></i> Excluir </button>
+                                                                                  <button class="btn btn-outline btn-danger btn-sm" data-toggle="modal" data-target="#modalExclusao{{$fornecedor->t08_idFornecedor}}"><i class="fa fa-times"></i> Excluir </button>
                                                                                 
                                                                                 
                                                                             </td>
                                                                     </tr>
-                                                                             <!--Modal  de Exlusão -->
+                                                                            
+                                                                        @endif
+                                                                    <!--Modal  de Exlusão -->
 
 
-                                                                        <div class="modal inmodal" id="modalExclusao{{$fornecedor->t07_idfornecedorBancaria}}" tabindex="-1" role="dialog"  aria-hidden="true">
+                                                                        <div class="modal inmodal" id="modalExclusao{{$fornecedor->t08_idFornecedor}}" tabindex="-1" role="dialog"  aria-hidden="true">
                                                                                 <div class="modal-dialog">
                                                                                     <div class="modal-content animated fadeIn">
                                                                                         <div class="modal-header">
                                                                                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                                                                             <i class="fa fa-warning fa-4x text-danger"></i>
                                                                                             <h4 class="modal-title">Exclusão de fornecedor</h4>
-                                                                                        <p>Ao confirmar essa operação, a fornecedor será  <strong class="text-danger">EXCLUIDA!</strong> </p>
+                                                                                        <p>Ao confirmar essa operação, a fornecedor será  <strong class="text-danger">EXCLUIDO!</strong> </p>
                                                                                         </div>
                                                                                         <div class="modal-body">
                                                                                             <div class="text-center">
-                                                                                                <p>Deseja excluir a fornecedor tipo  <span class="text-danger">{{$fornecedor->t07_tipofornecedor}}</p>
-                                                                                                <p>{{$fornecedor->bancos->t06_nome}}</p>
-                                                                                                <p>Agencia :{{$fornecedor->t07_agencia}}  - fornecedor :{{$fornecedor->t07_fornecedor}} </p>
+                                                                                                <p>Deseja excluir a fornecedor <span class="text-danger">{{$fornecedor->t08_nome}}</p>
+                                                                                                <p>{{$fornecedor->categoria->t09_nome}}?</p>
 
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="modal-footer">
                                                                                             <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                                                                                            <a href="/fornecedores/destroy/{{$fornecedor->t07_idfornecedorBancaria}}" type="button" class="btn btn-danger">Excluir</a>
+                                                                                            <a href="/fornecedores/destroy/{{$fornecedor->t08_idFornecedor}}" type="button" class="btn btn-danger">Excluir</a>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>

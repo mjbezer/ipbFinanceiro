@@ -11,4 +11,11 @@ class Fornecedor extends Model
 
     protected $guarded   = ['_token'];
 
+
+    public function categoria(){
+
+        return $this->hasOne(CategoriaFornecedor::class, 't09_idCategoriaFornecedores', 't09_idCategoriaFornecedores');
+    }
+
+ 
 }

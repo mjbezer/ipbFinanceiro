@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Models\Fornecedor;
-use App\Http\Models\TipoFornecedor;
+use App\Http\Models\CategoriaFornecedor;
 use Illuminate\Database\QueryException;
 
 
@@ -27,7 +27,8 @@ class FornecedorController extends Controller
    
     public function create()
     {
-        return view('formFornecedor');
+        $categoriaFornecedores = CategoriaFornecedor::all();
+        return view('formFornecedor')->with('categoriaFornecedores',$categoriaFornecedores);
     }
 
     
@@ -35,9 +36,10 @@ class FornecedorController extends Controller
     {
         try{
         $dataForm = $request->all();
+
         Fornecedor::create($dataForm);
 
-        return redirect()->index();
+        return redirect('fornecedores/list');
 
         }catch(\Exeption $e){
 
@@ -54,37 +56,61 @@ class FornecedorController extends Controller
     }
 
    
-    public function edit($id)
+    public function edit($t08_idFornecedor)
     {
-        //
+        $fornecedor  = Fornecedor::find($t08_idFornecedor);
+        $categoriaFornecedores = CategoriaFornecedor::all();
+        return view('formFornecedor')->with('categoriaFornecedores',$categoriaFornecedores)
+                                      ->with('fornecedor', $fornecedor);
     }
 
     
-    public function update(Request $request, $id)
+    public function update(Request $request, $t08_idFornecedor)
     {
-        //
+        $dataForm = $request->all();
+        $fornecedor = Fornecedor::find($t08_idFornecedor);
+        $update =  $fornecedor->update($dataForm);
+
+        if($update){
+            return redirect('fornecedores/list');
+        }else{
+            return redirect('fornecedores/edit/$t03_idMembro')->with(['errors'=>'Falha ao editar Registro']);
+        }
+      
     }
 
    
-    public function destroy($id)
+    public function destroy($t08_idFornecedor)
     {
-        //
+        $fornecedor= Fornecedor::find($t08_idFornecedor);
+        $fornecedor->t08_situacao = 'Inativo';
+        $update = $fornecedor->save();
+
+        if($update){
+            return redirect('/fornecedores/list');
+        }else{
+            return redirect('/fornecedores/list/$t08_idFornecedor')->with(['errors'=>'Falha ao inativar o membro!']);
+
+        }
     }
 
     
     public function createTipo()
     {
-        $tipoFornecedor = TipoFornecedor::all();
-        return view('formTipoFornecedor')->with('tipoFornecedor', $tipoFornecedor);
+        $tipoFornecedores = CategoriaFornecedor::all();
+    
+        return view('formTipoFornecedor')->with('tipoFornecedores', $tipoFornecedores);
     }
 
     public function storeTipo(Request $request)
     {
         try{
         $dataForm = $request->all();
-        TipoFornecedor::create($dataForm);
 
-        return redirect()->createTipo();
+            
+        CategoriaFornecedor::create($dataForm);
+
+        return redirect()->back();
 
         }catch(\Exeption $e){
 
@@ -93,5 +119,22 @@ class FornecedorController extends Controller
             return redirect()->back()->with('mensagem',$mensagem);}
 
 
+    }
+    public function destroyTipo($t09_idCategoriaFornecedores){
+
+        try{
+            
+            $categoriaFornecedor = CategoriaFornecedor::find($t09_idCategoriaFornecedores);
+            $categoriaFornecedor->delete();
+            
+            return redirect()->back();
+
+        }catch(\Exception $e){
+
+            $mensagem = $e->getmessage();
+            
+            
+             return redirect()->back()->with('mensagem',$mensagem); 
+        }
     }
 }
